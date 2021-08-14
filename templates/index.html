@@ -74,11 +74,14 @@
                     <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
                     <div class="row">
                         <div class="col">
-                            <h3 class="text-dark mb-0" style="margin-top: 5%;margin-bottom: 5%;">India</h3>
+                            <h3 class="text-dark mb-0" style="margin-top: 5%;margin-bottom: 5%;" id="selected-state">
+                                India</h3>
                         </div>
-                        <div class="col"><select style="width: 100%;height: 50%;margin-top: 5%;margin-bottom: 5%;">
-                                <option value="india" selected="">Select State</option>
-                            </select></div>
+                        <div class="col">
+                            <select style="width: 100%;height: 50%;margin-top: 5%;margin-bottom: 5%;" id="state-select">
+                                <option value="" selected="">Select State</option>
+                            </select>
+                        </div>
                         <div class="col"></div>
                     </div>
                     <div class="row">
@@ -87,9 +90,12 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Total
-                                                    Cases</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$40,000</span></div>
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                                <span>Total
+                                                    Cases</span>
+                                            </div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="total-cases">40,000</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +108,8 @@
                                         <div class="col me-2">
                                             <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Total
                                                     Recovered</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span
+                                                    id="total-discharged">215,000</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +124,8 @@
                                                     today</span></div>
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span
+                                                            id="new-cases">50</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,7 +141,8 @@
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1">
                                                 <span>Recovered Today</span>
                                             </div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="new-discharged">18</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +155,9 @@
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Total
                                                     deaths</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$40,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0">
+                                                <span id="total-deaths">40,000</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -159,13 +170,15 @@
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Deaths
                                                     today</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$40,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="new-deaths">$40,000</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--Chart Row-->
                     <div class="row">
                         <div class="col-lg-7 col-xl-8" style="width: 100%;">
                             <div class="card shadow mb-4">
@@ -191,6 +204,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Next div currently has no purpose, think of something to do here -->
                     <div class="row">
                         <div class="col-lg-6 mb-4">
                             <div class="card shadow mb-4">
@@ -284,6 +298,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Next div contains contact info of various types -->
                     <div class="row">
                         <div class="col">
                             <h3 style="background: var(--bs-white);color: var(--bs-dark);">Contacts</h3>
@@ -335,6 +350,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Footer -->
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
