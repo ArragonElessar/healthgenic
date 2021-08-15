@@ -6,7 +6,7 @@ with open('./static/data/data.json', 'r') as myFile:
     global data
     data = load(myFile)
 
-
+# returns chart data for states
 def chartDataByState(n_days, step, state):
     state_index = 0
     for i in range(len(data["data"][-1]["regional"])):
