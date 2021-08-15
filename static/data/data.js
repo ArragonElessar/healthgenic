@@ -131,3 +131,91 @@ var response = {
             1708917, 'confirmedCasesForeign': 1, 'discharged': 1685689, 'deaths': 22783, 'totalConfirmed': 1708918
     }, { 'loc': 'West Bengal', 'confirmedCasesIndian': 1537890, 'confirmedCasesForeign': 0, 'discharged': 1509521, 'deaths': 18291, 'totalConfirmed': 1537890 }]
 }
+
+var canvas = {"type": "line",
+"data": {
+  "labels": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug"
+  ],
+  "datasets": [
+    {
+      "label": "Earnings",
+      "fill": true,
+      "data": [
+        "0",
+        "10000",
+        "5000",
+        "15000",
+        "10000",
+        "20000",
+        "15000",
+        "25000"
+      ],
+      "backgroundColor": "rgba(78, 115, 223, 0.05)",
+      "borderColor": "rgba(78, 115, 223, 1)"
+    }
+  ]
+},
+"options": {
+  "maintainAspectRatio": false,
+  "legend": {
+    "display": false,
+    "labels": {
+      "fontStyle": "normal"
+    }
+  },
+  "title": {
+    "fontStyle": "normal"
+  },
+  "scales": {
+    "xAxes": [
+      {
+        "gridLines": {
+          "color": "rgb(234, 236, 244)",
+          "zeroLineColor": "rgb(234, 236, 244)",
+          "drawBorder": false,
+          "drawTicks": false,
+          "borderDash": [
+            "2"
+          ],
+          "zeroLineBorderDash": [
+            "2"
+          ],
+          "drawOnChartArea": false
+        },
+        "ticks": {
+          "fontColor": "#858796",
+          "padding": 20
+        }
+      }
+    ],
+    "yAxes": [
+      {
+        "gridLines": {
+          "color": "rgb(234, 236, 244)",
+          "zeroLineColor": "rgb(234, 236, 244)",
+          "drawBorder": false,
+          "drawTicks": false,
+          "borderDash": [
+            "2"
+          ],
+          "zeroLineBorderDash": [
+            "2"
+          ]
+        },
+        "ticks": {
+          "fontColor": "#858796",
+          "padding": 20
+        }
+      }
+    ]
+  }
+}
+}

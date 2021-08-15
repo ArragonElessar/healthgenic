@@ -27,40 +27,38 @@ $(document).ready(function () {
         $("#total-cases").html(data.data.summary.total)
         $("#total-deaths").html(data.data.summary.deaths)
         $('#total-discharged').html(data.data.summary.discharged)
+        $("#total-active").html(data.data.summary.total - data.data.summary.deaths - data.data.summary.discharged)
         // now get calculated data for newCases, newDischarged and newDeaths
         $.get('/handler/India?date=' + last_update, function (response) {
             $("#new-deaths").html(response.newDeaths)
             $("#new-cases").html(response.newCases)
             $("#new-discharged").html(response.newDischarged)
+            $("#new-active").html(response.newCases - response.newDischarged - response.newDeaths)
             return today_India
         }).then(function (today_India) {
             // top states by cases
             $.get('/handler/topStates?date=' + last_update, function (stateWiseData) {
-                console.log(stateWiseData.data)
-                for(let i = 0; i < 5; i++){
-                    let percent = ((stateWiseData.data[i].newCases / today_India.newCases)*100).toFixed(2)
+                for (let i = 0; i < 5; i++) {
+                    let percent = ((stateWiseData.data[i].newCases / today_India.newCases) * 100).toFixed(1)
                     $("#state-name-" + i).html(stateWiseData.data[i].state + `: ` + stateWiseData.data[i].newCases +
-                    `<span class="float-end">
-                        `+percent+`
+                        `<span class="float-end">
+                        `+ percent + `
                     %</span>`)
                     $("#state-progress-" + i).attr("aria-valuenow", percent)
-                    $("#state-progress-" + i).css("width", percent+"%")
+                    $("#state-progress-" + i).css("width", percent + "%")
 
-                    $("#card-state-name-"+i).html(stateWiseData.data[i].state)
+                    $("#card-state-name-" + i).html(stateWiseData.data[i].state)
                     $("#card-state-newCases-" + i).html("New Cases: " + stateWiseData.data[i].newCases)
                     $("#card-state-newDeaths-" + i).html("Deaths Today: " + stateWiseData.data[i].newDeaths)
                     $("#card-state-newDischarged-" + i).html("Discharged Today: " + stateWiseData.data[i].newDischarged)
                 }
 
-                $("#new-cases-heading").html("New Cases Today: "+today_India.newCases)
+                $("#new-cases-heading").html("New Cases Today: " + today_India.newCases)
             })
         })
-        
-       
     })
-
-
-
+    
+    console.log($("#chart").attr("data-bss-chart"))
 
     // on selection of a particular state, send AJAX request to fetch data for that state
     $("#state-select").on("change", function () {
@@ -74,6 +72,8 @@ $(document).ready(function () {
             $("#new-discharged").html(response.newDischarged)
             $('#total-discharged').html(response.discharged)
             $("#new-cases").html(response.newCases)
+            $("#new-active").html(response.newCases - response.newDischarged - response.newDeaths)
+            $("#total-active").html(response.totalConfirmed - response.deaths - response.discharged)
             $('#selected-state').html($("#state-select").val())
         })
     })
