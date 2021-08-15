@@ -10,7 +10,9 @@ function indiaChart(past_days) {
 
 // function to draw chart with given x and y arrays
 function updateChart(data) {
-
+    // emptys the previous chart
+    $("#chart-area").empty();
+    $("#chart-area").append('<canvas id="chart"></canvas>')
     // holds data of x and y axis
     y_labels = data.newCases
     x_labels = data.dates
@@ -28,6 +30,8 @@ $(document).ready(function () {
     $("#PranavRuparel").click(function () {
         window.open('https://www.linkedin.com/in/pranav-ruparel/', _blank)
     })
+    // sidebar collapse
+    $("#sidebarToggle").trigger("click")
 
     // send states to populate dropdown
     var states = ['Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttarakhand', 'Uttar Pradesh', 'West Bengal']
