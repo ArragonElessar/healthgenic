@@ -57,8 +57,24 @@ $(document).ready(function () {
             })
         })
     })
+    $.get('/handler/chartDays?days='+600, function(data){
+        y_labels = data.newCases
+        x_labels = data.dates
+        console.log(x_labels)
+        console.log(y_labels)
+
+        chart_data = { "type": "line", "data": { "labels": x_labels , "datasets": [{ "label": "Cases", "fill": true, "data": y_labels, "backgroundColor": "rgba(78, 115, 223, 0.05)", "borderColor": "rgba(78, 115, 223, 1)" }] }, "options": { "maintainAspectRatio": false, "legend": { "display": false, "labels": { "fontStyle": "normal" } }, "title": { "fontStyle": "normal" }, "scales": { "xAxes": [{ "gridLines": { "color": "rgb(234, 236, 244)", "zeroLineColor": "rgb(234, 236, 244)", "drawBorder": false, "drawTicks": false, "borderDash": ["2"], "zeroLineBorderDash": ["2"], "drawOnChartArea": false }, "ticks": { "fontColor": "#858796", "padding": 20 } }], "yAxes": [{ "gridLines": { "color": "rgb(234, 236, 244)", "zeroLineColor": "rgb(234, 236, 244)", "drawBorder": false, "drawTicks": false, "borderDash": ["2"], "zeroLineBorderDash": ["2"] }, "ticks": { "fontColor": "#858796", "padding": 20 } }] } } }
+
+    new Chart("chart", chart_data)
+    })
     
-    console.log($("#chart").attr("data-bss-chart"))
+    
+
+    /*
+    x_labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]
+    y_labels = ["21000", "10000", "500000", "15000", "10000", "20000", "15000", "25000"]
+    */
+    
 
     // on selection of a particular state, send AJAX request to fetch data for that state
     $("#state-select").on("change", function () {
