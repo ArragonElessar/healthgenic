@@ -7,8 +7,29 @@ with open('./static/data/data.json', 'r') as myFile:
     data = load(myFile)
 
 
-def hello():
-    print("hello")
+
+def chartDataByState(n_days, step, state):
+    state_index = 0
+    for i in range(len(data["data"][-1]["regional"])):
+        if data["data"][-1]["regional"][i]["loc"] == state:
+            state_index = i
+    # return object template
+    info = {"dates": [], "newCases": []}
+
+    for i in range(0, int(n_days/step), step):
+        change = (data["data"][len(data["data"])-1 - i]["regional"][state_index]["totalConfirmed"] - data["data"][len(data["data"])-2 - i]["regional"][state_index]["totalConfirmed"])
+        date = data["data"][len(data["data"])-1 - i]["day"]
+        # to remove unruly data
+        if change != 0:
+            info["newCases"].append(change)
+            info["dates"].append(date)
+        else:
+            n_days += 1
+    # reverse the arrays so that earliest data goes first
+    info["newCases"].reverse()
+    info["dates"].reverse()
+
+    return info
 
 # datetime.strptime(day["day"],'%Y-%m-%d')
 # returns data given a date and a state
@@ -73,7 +94,6 @@ def dataIndia(date):
                     }
 
 
-
 # this function returns top states acc to new Cases, and their statistics
 def topStatesbyNewCases(date, number):
     # mandatory since there are only 36 states
@@ -121,7 +141,6 @@ def chartByDays(n_days, step):
 
     return info
 
-
 def updateDataStore():
     dataStoreLatest = datetime.strptime(
         "2021-08-14T02:30:00.000Z"[:10], '%Y-%m-%d')
@@ -138,4 +157,3 @@ def updateDataStore():
             print("updated")
     else:
         print("up to date")
-
