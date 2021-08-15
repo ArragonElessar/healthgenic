@@ -1,15 +1,11 @@
-from datetime import date
 from flask import Flask, render_template, request
-from data import newData, dataIndia, checkLast, topStatesbyNewCases, chartByDays
+from data import newData, dataIndia, updateDataStore, topStatesbyNewCases, chartByDays
 
 app = Flask(__name__)
 
-# gets today's date
-today = date.today().strftime("%Y-%m-%d")
+updateDataStore()
 
 # index route
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -19,13 +15,7 @@ def index():
 def login():
     return render_template('login.html')
 
-@app.route('/chart')
-def chart():
-    return render_template('chart.html')
-
 # page to handle get requests for statewise data
-
-
 @app.route('/handler/state/')
 def stateData():
     # state will be passed as parameter
@@ -40,9 +30,6 @@ def stateData():
 def indiaData():
     # data parameter
     date = request.args.get('date')[:10]
-    # check dates function
-    checkLast(date)
-
     return dataIndia(date)
 
 
