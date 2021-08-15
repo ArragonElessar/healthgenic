@@ -7,7 +7,6 @@ with open('./static/data/data.json', 'r') as myFile:
     data = load(myFile)
 
 
-
 def chartDataByState(n_days, step, state):
     state_index = 0
     for i in range(len(data["data"][-1]["regional"])):
@@ -17,7 +16,8 @@ def chartDataByState(n_days, step, state):
     info = {"dates": [], "newCases": []}
 
     for i in range(0, int(n_days/step), step):
-        change = (data["data"][len(data["data"])-1 - i]["regional"][state_index]["totalConfirmed"] - data["data"][len(data["data"])-2 - i]["regional"][state_index]["totalConfirmed"])
+        change = (data["data"][len(data["data"])-1 - i]["regional"][state_index]["totalConfirmed"] -
+                  data["data"][len(data["data"])-2 - i]["regional"][state_index]["totalConfirmed"])
         date = data["data"][len(data["data"])-1 - i]["day"]
         # to remove unruly data
         if change != 0:
@@ -141,14 +141,20 @@ def chartByDays(n_days, step):
 
     return info
 
+# this function keeps our dataStore up to date, but when to call it is still in discussion
+
+
 def updateDataStore():
+    # function under development
+    # gets the latest date from our dataStore
     dataStoreLatest = datetime.strptime(
         "2021-08-14T02:30:00.000Z"[:10], '%Y-%m-%d')
     r = requests.get('https://api.rootnet.in/covid19-in/stats/latest')
     response = loads(r.text)
+    # gets the latest date from API
     latestAPI = datetime.strptime(
         response["lastOriginUpdate"][:10], '%Y-%m-%d')
-    print(dataStoreLatest, latestAPI)
+    # compares, if API has a newer date, update our data store
     if(latestAPI > dataStoreLatest):
         history = requests.get(
             'https://api.rootnet.in/covid19-in/stats/history')

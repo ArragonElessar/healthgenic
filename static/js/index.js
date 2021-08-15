@@ -1,10 +1,14 @@
+// function to draw chart for All India Data
 function indiaChart(past_days) {
+    // set heading of chart
     $("#chart-heading").html('New Cases: India      Past: ' + (past_days / 3).toFixed(0) + ' days')
+    // GET Request
     $.get('/handler/chartDays?days=' + past_days, function (data) {
         updateChart(data)
     })
 }
 
+// function to draw chart with given x and y arrays
 function updateChart(data) {
 
     // holds data of x and y axis
@@ -18,15 +22,12 @@ function updateChart(data) {
     new Chart("chart", chart_data)
 }
 
-
-
-
-
+//---------------------------------------------------- Document Ready----------------------------------------
 $(document).ready(function () {
+    // link for my LinkedIn
     $("#PranavRuparel").click(function () {
         window.open('https://www.linkedin.com/in/pranav-ruparel/', _blank)
     })
-
 
     // send states to populate dropdown
     var states = ['Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttarakhand', 'Uttar Pradesh', 'West Bengal']
@@ -34,14 +35,16 @@ $(document).ready(function () {
         $("#state-select").append(`<option value="` + states[i] + `">` + states[i] + `</option>`)
     }
 
-    // get India's data on page ready
+    // Global Variables
     let last_update = "2021-08-13T02:30:00.000Z" // hardcoded for now
     let today_India = {}
+
+    // -------------------------ALL INDIA VALUES------------------------------------------
     // send request to the API
     $.get("https://api.rootnet.in/covid19-in/stats/latest", function (data) {
         // last origin date is the date for latest data
         // last_update = data.lastOriginUpdate
-        console.log("last update: " + last_update)
+        //console.log("last update: " + last_update)
         // add to html
         $("#total-cases").html(data.data.summary.total.toLocaleString())
         $("#total-deaths").html(data.data.summary.deaths.toLocaleString())
@@ -55,6 +58,8 @@ $(document).ready(function () {
             $("#new-active").html((response.newCases - response.newDischarged - response.newDeaths).toLocaleString())
             return today_India
         }).then(function (today_India) {
+
+            // -----------------------------------------TOP 5 STATES--------------------------------------------
             // top states by cases
             $.get('/handler/topStates?date=' + last_update, function (stateWiseData) {
                 for (let i = 0; i < 5; i++) {
@@ -86,13 +91,7 @@ $(document).ready(function () {
         indiaChart(past_days)
     })
     indiaChart(1200)
-
-    
-    $.get('https://api.rootnet.in/covid19-in/contacts', function(response){
-        console.log(response)
-    })
-
-
+    // -------------------------------------------DATA BY STATE--------------------------------------------------------
     // on selection of a particular state, send AJAX request to fetch data for that state
     $("#state-select").on("change", function () {
         if ($("#state-select").val() == "India") {
@@ -134,8 +133,5 @@ $(document).ready(function () {
                 $("#chart-heading").html('New Cases: '+$("#state-select").val())
             })
         }
-
-
-
     })
 })

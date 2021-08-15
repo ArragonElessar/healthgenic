@@ -49,7 +49,7 @@ def chartByState():
     return chartDataByState(900, 3, state)
 
 # function to compare dates and update datastore
-#updateDataStore()
+updateDataStore()
 
 if __name__ == '__main__':
     app.run(debug=True)
