@@ -20,3 +20,7 @@ This is a web application that uses publicly available data about COVID-19 colle
 # Team
 1. Pranav Ruparel
 2. Utkarsh Agiwal
+
+
+# Updates
+1. 18 Aug 21. It seems like the REST API, that we used to fetch our data is under maintainance, hence a date has been hardcoded to simulate the process. As soon as it is back and running, we shall put the latest data back up
